@@ -1,0 +1,47 @@
+// Version: 1.0.0
+type BookingRequest__952014319 =
+  {
+    address : Text;
+    dateTime : Text;
+    email : Text;
+    id : Nat;
+    name : Text;
+    phone : Text;
+    serviceType : ServiceType__1050528524;
+    status : BookingStatus__544412556;
+    timestamp : Timestamp__523471765
+  };
+type BookingStatus__544412556 = {#confirmed; #pending};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type QuoteStatus__1035945579 = {#contacted; #new_};
+type QuoteSubmission__760138863 =
+  {
+    description : Text;
+    email : Text;
+    id : Nat;
+    name : Text;
+    phone : Text;
+    serviceType : ServiceType__1050528524;
+    status : QuoteStatus__1035945579;
+    timestamp : Timestamp__523471765
+  };
+type ServiceType__1050528524 = {#Emergency; #Gutters; #Repair; #Replacement};
+type Timestamp__301639476 = Int;
+type Timestamp__523471765 = Timestamp__301639476;
+actor {
+  stable bookings :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?BookingRequest__952014319]];
+      var elementIndex : Nat__490723111
+    };
+  stable var nextBookingId : Nat;
+  stable var nextQuoteId : Nat;
+  stable quotes :
+    {
+      var blockIndex : Nat__490723111;
+      var blocks : [var [var ?QuoteSubmission__760138863]];
+      var elementIndex : Nat__490723111
+    }
+};

@@ -1,0 +1,49 @@
+type Timestamp = int;
+type ServiceType = 
+ variant {
+   Emergency;
+   Gutters;
+   Repair;
+   Replacement;
+ };
+type QuoteSubmission = 
+ record {
+   description: text;
+   email: text;
+   id: nat;
+   name: text;
+   phone: text;
+   serviceType: ServiceType;
+   status: QuoteStatus;
+   timestamp: Timestamp;
+ };
+type QuoteStatus = 
+ variant {
+   contacted;
+   new;
+ };
+type BookingStatus = 
+ variant {
+   confirmed;
+   pending;
+ };
+type BookingRequest = 
+ record {
+   address: text;
+   dateTime: text;
+   email: text;
+   id: nat;
+   name: text;
+   phone: text;
+   serviceType: ServiceType;
+   status: BookingStatus;
+   timestamp: Timestamp;
+ };
+service : {
+  getBookings: () -> (vec BookingRequest) query;
+  getQuotes: () -> (vec QuoteSubmission) query;
+  submitBooking: (name: text, phone: text, email: text, address: text,
+   serviceType: ServiceType, dateTime: text) -> (nat);
+  submitQuote: (name: text, phone: text, email: text, serviceType:
+   ServiceType, description: text) -> (nat);
+}
